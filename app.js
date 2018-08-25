@@ -1,12 +1,18 @@
 const express = require('express');
 const app = express()
+import { initiateBattle, charactersInActiveParty, changeToDowned } from './priority.js';
+
 app.use(express.static('public'));
 
 app.set('view engine', 'ejs')
 
+initiateBattle(1);
+let characterArray = charactersInActiveParty();
+
 app.get('/', function (req, res) {
-    res.render('index', { title: 'Hey', message: 'Hello there!' })
+    res.render('index', { characters: characterArray, message: 'Hello there!' })
 })
+
 
 
 app.listen(3000, () => console.log('BattleRole app listening on port 3000!'))

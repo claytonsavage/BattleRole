@@ -1,4 +1,8 @@
-characterDatabase = {
+// require("babel-core").transform("code", options);
+
+
+
+let characterDatabase = {
     '1': {
         'name': 'Marvin',
         'priority': 4,
@@ -70,6 +74,14 @@ function readWhatCharacterIsActiveParty() {
     });
 }
 
+function charactersInActiveParty() {
+    let characters = []
+    activeParty.forEach(character => {
+       characters.push(character);
+    });
+    return characters;
+}
+
 // determine priority of characters
 function sortOrderFromPriority() {
     charactersInPlay.sort(function (a, b) {
@@ -93,7 +105,7 @@ function determineActiveParty(currentGroup) {
 }
 
 function addAllCharactersFromDatabase() {
-    for (characters in characterDatabase) {
+    for (let characters in characterDatabase) {
         addCharacterInPlay(characterDatabase[characters])
     }
 }
@@ -107,6 +119,7 @@ function initiateBattle(group) {
     console.log('The battle is about to begin. The battle participants are: ')
     readWhatCharacterIsActiveParty();
     console.log('----------------------------');
+    //TODO add array of characters
 }
 
 function addToBattle(group, add = false) {
@@ -131,7 +144,7 @@ function continueBattle() {
 }
 
 function isAnyoneDowned() {
-    for (character in activeParty) {
+    for (let character in activeParty) {
         if (activeParty[character].downed == true) {
             activeParty.splice(character, 1);
         }
@@ -139,7 +152,7 @@ function isAnyoneDowned() {
 }
 
 function changeToDowned(name) {
-    for (character in activeParty) {
+    for (let character in activeParty) {
         if (activeParty[character].name == name) {
             activeParty[character].downed = true;
             console.log(activeParty[character].name + ' was defeated.');
@@ -149,7 +162,7 @@ function changeToDowned(name) {
 }
 
 function changePriority(name, value) {
-    for (character in activeParty) {
+    for (let character in activeParty) {
         if (activeParty[character].name == name) {
             activeParty[character].priority = value;
             console.log(activeParty[character].name + ' got higher priority.');
@@ -161,7 +174,7 @@ function changePriority(name, value) {
 
 
 // set up who is in the battle and the order they have for priority
-initiateBattle(1);
+// initiateBattle(1);
 
 let dragon = {
     'name': 'Crazy Dragon',
@@ -173,14 +186,16 @@ let dragon = {
 
 addToBattle(1, dragon);
 
-changeToDowned('Jeff');
+// changeToDowned('Jeff');
 
-continueBattle(1);
+// continueBattle(1);
 
-changeToDowned('Dan');
+// changeToDowned('Dan');
 
-changePriority('Marvin', 20);
+// changePriority('Marvin', 20);
 
-continueBattle(1);
+// continueBattle(1);
 
 // todo have seperate groups
+
+export { initiateBattle, charactersInActiveParty, changeToDowned };
