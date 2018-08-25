@@ -14,9 +14,9 @@
     <% for(let i in characters) { %>
         <div class="tile is-parent">
             <article class="tile is-child box">
-            <p class="title"><%= characters[i].name %></p>
+            <p class="title" name="<%= characters[i].name %>"><%= characters[i].name %></p>
             <p class="subtitle">Priority <%= characters[i].priority %></p>
-            <div class="button">Downed</div>
+            <div class="button" id="<%= characters[i].name %>">Downed</div>
             </article>
         </div>
     <% } %>

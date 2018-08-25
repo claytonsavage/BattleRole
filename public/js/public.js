@@ -1,9 +1,17 @@
-$( document ).ready(function() {
-    console.log( "ready!" );
-
-    $( ".button" ).click(function() {
-        alert( "Handler for .click() called." );
-    });
-
+$(document).ready(function () {
+            
+    $(".button").click(function () {
+ 
+        let currentName = $(this).closest('.button').attr("id");
+        console.log(currentName);
+        $.ajax({
+          url: `/character/${currentName}/update/downed`,
+          method: 'POST',
+          success: function (reload) {
+            // reload();
+            console.log('it works');
+          }
+        });
+      });
 
 });
