@@ -198,4 +198,4 @@ addToBattle(1, dragon);
 
 // todo have seperate groups
 
-export { initiateBattle, charactersInActiveParty, changeToDowned };
+export { initiateBattle, charactersInActiveParty, changeToDowned, continueBattle };
