@@ -51,16 +51,16 @@ let characterDatabase = {
 let activeParty = [];
 
 // characters in memory
-let charactersInPlay = [];
+let allCharacters = [];
 
 // add character
 function addCharacterInPlay(character) {
-    charactersInPlay.push(character);
+    allCharacters.push(character);
 }
 
 // print characters name
 function readWhatCharacterIsInPlay() {
-    charactersInPlay.forEach(character => {
+    allCharacters.forEach(character => {
         console.log(character.name)
     });
 }
@@ -84,20 +84,20 @@ function charactersInActiveParty() {
 
 // determine priority of characters
 function sortOrderFromPriority() {
-    charactersInPlay.sort(function (a, b) {
+    allCharacters.sort(function (a, b) {
         return b.priority - a.priority;
     });
 }
 
 // print priority of all characters
-function readOrderOfCharactersInPlayFromPriority() {
-    sortOrderFromPriority(charactersInPlay);
+function readOrderOfallCharactersFromPriority() {
+    sortOrderFromPriority(allCharacters);
     readWhatCharacterIsInPlay();
 }
 
 // create group of which characters can fight in current group
 function determineActiveParty(currentGroup) {
-    charactersInPlay.forEach(character => {
+    allCharacters.forEach(character => {
         if (character.group == currentGroup && character.downed == false) {
             activeParty.push(character);
         }
@@ -198,4 +198,4 @@ addToBattle(1, dragon);
 
 // todo have seperate groups
 
-export { initiateBattle, charactersInActiveParty, changeToDowned, continueBattle };
+export { initiateBattle, charactersInActiveParty, changeToDowned, continueBattle, allCharacters };

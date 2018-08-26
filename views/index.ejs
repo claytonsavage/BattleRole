@@ -9,18 +9,29 @@
   </head>
   <body>
     <div class="container">
-    <h1 class="is-size-1">welcome to BattleRole</h1>
-        <div class="tile is-ancestor">
-    //  <% for(let i in characters) { %>
-    //     <div class="tile is-parent">
-    //         <article class="tile is-child box">
-    //         <p class="title" name="<%= characters[i].name %>"><%= characters[i].name %></p>
-    //         <p class="subtitle">Priority <%= characters[i].priority %></p>
-    //         <div class="button" id="<%= characters[i].name %>">Downed</div>
-    //         </article>
-    //     </div>
-    // <% } %>
+        <h1 class="is-size-1">welcome to BattleRole</h1>
+        <div id="origin">
         </div>
-</div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="footer has-background-black">
+        <div id="all">
+            <div class="tile is-ancestor">
+                <% for(let i in allCharacters) { %>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                    <p class="title"><%= allCharacters[i].name %></p>
+                    <div class="button">Add to fight</div>
+                    </article>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
   </body>
 </html>

@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express()
-import { initiateBattle, charactersInActiveParty, changeToDowned, continueBattle } from './priority.js';
-import { stringify } from 'querystring';
+import { initiateBattle, charactersInActiveParty, changeToDowned, continueBattle, allCharacters } from './priority.js';
 
 app.use(express.static('public'));
 
@@ -11,7 +10,7 @@ initiateBattle(1);
 let characterArray = charactersInActiveParty();
 
 app.get('/', function (req, res) {
-    res.render('index', { characters: characterArray })
+    res.render('index', { characters: characterArray, allCharacters: allCharacters })
 })
 
 app.post('/character/:name/update/downed', function(req, res) {

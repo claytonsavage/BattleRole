@@ -2,33 +2,31 @@ $(document).ready(function () {
 
 
     function makeCharacterTile(updatedCharacters) {
-        elementString = "";
+        elementString = '<div class="tile is-ancestor">';
         for( let i in updatedCharacters ){
             elementString += '<div class="tile is-parent"><article class="tile is-child box"><p class="title" name="' + updatedCharacters[i].name + '">' + updatedCharacters[i].name + '</p><p class="subtitle">Priority ' + updatedCharacters[i].priority + '</p><div class="button" id="' + updatedCharacters[i].name + '">Downed</div></article></div>'
+            if( i % 2 == 0 && i != 0 ){
+                elementString += '</div><div class="tile is-ancestor">'
+            }
         }
         return elementString;
     }
 
     function renderCharacters(updatedCharacters) {
-        console.log();
-
-        $('.is-ancestor').empty().append(makeCharacterTile(updatedCharacters));
+        $('#origin').empty().append(makeCharacterTile(updatedCharacters));
 
         $(".button").click(function () {
 
             let currentName = $(this).closest('.button').attr("id");
-            console.log(currentName);
             $.ajax({
                 url: `/character/${currentName}/update/downed`,
                 method: 'POST',
                 success: function (reload) {
-                    // reload();
                     loadCharacters();
-                    console.log('it works');
                 }
             });
         });
-        
+
     }
 
     function loadCharacters() {
@@ -37,7 +35,6 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'JSON',
             success: function (updatedCharacters) {
-                console.log(updatedCharacters);
                 renderCharacters(updatedCharacters);
             }
         });
@@ -48,14 +45,11 @@ $(document).ready(function () {
     $(".button").click(function () {
 
         let currentName = $(this).closest('.button').attr("id");
-        console.log(currentName);
         $.ajax({
             url: `/character/${currentName}/update/downed`,
             method: 'POST',
             success: function (reload) {
-                // reload();
                 loadCharacters();
-                console.log('it works');
             }
         });
     });
