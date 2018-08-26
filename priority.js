@@ -76,8 +76,10 @@ function readWhatCharacterIsActiveParty() {
 
 function charactersInActiveParty() {
     let characters = []
-    activeParty.forEach(character => {
-       characters.push(character);
+    allCharacters.forEach(character => {
+        if(character.group == 1 && character.downed == false){
+            characters.push(character);
+        }
     });
     return characters;
 }
@@ -122,8 +124,8 @@ function initiateBattle(group) {
     //TODO add array of characters
 }
 
-function addToBattle(group, add = false) {
-    activeParty.push(add);
+function addToBattle(addCharacter) {
+    allCharacters.push(addCharacter);
     recalculateOrderAfterAddToBattle();
     console.log('a new character joins the battle. The battle participants are: ');
     readWhatCharacterIsActiveParty();
@@ -136,26 +138,31 @@ function recalculateOrderAfterAddToBattle() {
     });
 }
 
-function continueBattle() {
-    isAnyoneDowned();
-    console.log('The battle continues. The battle participants are: ');
-    readWhatCharacterIsActiveParty();
-    console.log('----------------------------');
-}
-
-function isAnyoneDowned() {
-    for (let character in activeParty) {
-        if (activeParty[character].downed == true) {
-            activeParty.splice(character, 1);
+function changeToDowned(name) {
+    for (let character in allCharacters) {
+        if (allCharacters[character].name == name) {
+            allCharacters[character].downed = true;
+            console.log(allCharacters[character].name + ' was defeated.');
+            console.log('----------------------------');
         }
     }
 }
 
-function changeToDowned(name) {
-    for (let character in activeParty) {
-        if (activeParty[character].name == name) {
-            activeParty[character].downed = true;
-            console.log(activeParty[character].name + ' was defeated.');
+function changeFromDowned(name) {
+    for (let character in allCharacters) {
+        if (allCharacters[character].name == name) {
+            allCharacters[character].downed = false;
+            console.log(allCharacters[character].name + ' was revived.');
+            console.log('----------------------------');
+        }
+    }
+}
+
+function changeToGroup(name, currentGroup = 1) {
+    for (let character in allCharacters) {
+        if (allCharacters[character].name == name) {
+            allCharacters[character].group = currentGroup;
+            console.log(allCharacters[character].name + ' has joined the group.');
             console.log('----------------------------');
         }
     }
@@ -172,10 +179,6 @@ function changePriority(name, value) {
     recalculateOrderAfterAddToBattle();
 }
 
-
-// set up who is in the battle and the order they have for priority
-// initiateBattle(1);
-
 let dragon = {
     'name': 'Crazy Dragon',
     'priority': 12,
@@ -184,18 +187,12 @@ let dragon = {
     'downed': false
 };
 
-addToBattle(1, dragon);
+addToBattle(dragon);
 
 // changeToDowned('Jeff');
-
-// continueBattle(1);
 
 // changeToDowned('Dan');
 
 // changePriority('Marvin', 20);
 
-// continueBattle(1);
-
-// todo have seperate groups
-
-export { initiateBattle, charactersInActiveParty, changeToDowned, continueBattle, allCharacters };
+export { initiateBattle, charactersInActiveParty, changeToDowned, allCharacters, changeFromDowned, changeToGroup };
